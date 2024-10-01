@@ -6,13 +6,12 @@ const createUserSchema = joi.object().keys({
   username: joi.string().required(),
   email: joi.string().email().required(),
   password: joi.string().min(6).max(20).required(),
-  contactInfo: joi.string(),
   confirmPassword: joi.ref("password"),
+  role: joi.string(),
 });
 const updateUserSchema = joi.object().keys({
   username: joi.string().required(),
   email: joi.string().email().required(),
-  contactInfo: joi.string(),
 });
 module.exports = {
   createUser: async (req, res) => {
@@ -36,12 +35,11 @@ module.exports = {
         });
       }
       const hashedPassword = await bcrypt.hash(password, 10);
-
       const users = new user({
         username: validate.username,
         email: validate.email,
         password: hashedPassword,
-        contactInfo: validate.contactInfo,
+        role: req?.body?.role,
         image: req.file ? req.file.path : null,
       });
       const userCreated = await users.save();
@@ -115,11 +113,7 @@ module.exports = {
           message: "user not found!",
         });
       }
-      if (users.error) {
-        return res.send({
-          message: users.error,
-        });
-      }
+
       return res.send({
         message: "User deleted successfully",
       });

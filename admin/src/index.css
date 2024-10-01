@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color1: #ed1650;
+  --primary-color2: #e8a803;
+  --primary-color3: #e8483c;
+  --primary-color4: #eef8fe;
+}
+.prime1 {
+  color: #ed1650;
+  transition: all 0.3s ease-in-out;
+}
+.prime1.activePrime1:hover {
+  color: #ed1650;
+}
+.prime2 {
+  color: #e8a803;
+  transition: all 0.3s ease-in-out;
+}
+.prime2.activePrime2:hover {
+  color: #ed1650;
+}
+.prime3 {
+  color: #e8483c;
+  transition: all 0.3s ease-in-out;
+}
+.prime3.activePrime3:hover {
+  color: #ed1650;
+}
+body {
+  background-color: #eef8fe;
+}
+.btnMain {
+  background-color: var(--primary-color2);
+  transition: all 0.4s ease-in-out;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-weight: 500;
+  color: white;
+}
+.btnMain:hover {
+  background-color: var(--primary-color3);
+}
+
+.btnMain2 {
+  background-color: var(--primary-color3);
+  transition: all 0.4s ease-in-out;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-weight: 500;
+  color: white;
+}
+.btnMain2:hover {
+  background-color: var(--primary-color2);
+}
+
+::-webkit-scrollbar {
+  width: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip::after {
+  content: attr(data-title);
+  position: absolute;
+  background-color: var(--primary-color2);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 2vh;
+  font-weight: 500;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+}

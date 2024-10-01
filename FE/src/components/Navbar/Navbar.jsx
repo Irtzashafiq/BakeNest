@@ -1,26 +1,154 @@
-import React from "react";
-import MyButton from "../Button";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { FaShoppingCart, FaSearch, FaBars, FaTimes } from "react-icons/fa";
+import CartDrawer from "../CartDrawer";
+import "./navbar.css";
+import CartContext from "../../context/CartContext/CartContext";
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const { cartItems } = useContext(CartContext);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (location.pathname === "/home") {
+        if (window.scrollY > 30) {
+          setScrolled(true);
+        } else {
+          setScrolled(false);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [location.pathname]);
+
   return (
-    <div className=" h-[10vh] w-full bg-blue-300 flex rounded-b-lg">
-      <div className=" h-full w-1/2  flex justify-center">
-        <div className="h-full w-3/4 flex justify-start items-center ">
-        <strong className="text-xl cursor-pointer text-gray-100 shadow-gray-700 shadow-md p-2 rounded-md">Cake Bites</strong>
+    <>
+      <nav
+        className={`fixed top-0 w-full z-20 flex justify-between items-center p-4 transition-all duration-300 ${
+          location.pathname === "/home" && !scrolled
+            ? "bg-transparent text-white "
+            : "bg-white text-black shadow-md"
+        }`}
+      >
+        <div
+          className="text-5xl font-serif pl-8 cursor-pointer"
+          style={{ fontFamily: "'Great Vibes', cursive" }}
+        >
+          BakeNest
         </div>
-      </div>
-      <div className=" h-full w-1/2  flex justify-center">
-        <div className="h-full w-3/4 flex justify-around items-center ml-40">
-        <h1 className="text-lg font-semibold text-gray-700 cursor-pointer">Profile</h1>
-        <h1 className="text-lg font-semibold text-gray-700 cursor-pointer">About</h1>
-          <MyButton
-           btn=" bg-white hover:bg-gray-200  "
-           click={() => {}}
-           title="Logout"
+        <ul
+          className={`hidden md:flex space-x-8 ${
+            location.pathname === "/home" && !scrolled
+              ? "text-white"
+              : "text-black"
+          }`}
+        >
+          <li className="hover:underline hover:text-orange-400">
+            <Link to="/home">Home</Link>
+          </li>
+          <li className="hover:underline hover:text-orange-400">
+            <Link to="/menu">Menu</Link>
+          </li>
+          <li className="hover:underline hover:text-orange-400">
+            <Link to="/about">About</Link>
+          </li>
+          <li className="hover:underline hover:text-orange-400">
+            <Link to="/contact">Contact</Link>
+          </li>
+          <li className="hover:underline hover:text-orange-400">
+            <Link to="/tiers">Subscribe</Link>
+          </li>
+        </ul>
+        <div className="flex items-center gap-x-6 pr-8 w-[10vw]">
+          <div className="icon-wrapper">
+            <FaShoppingCart
+              className="icon cursor-pointer hover:text-gray-300 text-xl"
+              onClick={() => setCartOpen(true)}
+            />
+            {
+              <span className="badge bg-red-500">
+                {cartItems?.length > 0 ? cartItems?.length : 0}
+              </span>
+            }
+                
+          </div>
+          <div className="icon-wrapper">
+            <FaSearch className="icon cursor-pointer hover:text-gray-300 text-xl" />
+          </div>
+          <div className="icon-wrapper">
+            <FaBars
+              className="icon cursor-pointer hover:text-gray-300 text-xl"
+              onClick={() => setMenuOpen(true)}
+            />
+          </div>
+        </div>
+      </nav>
+
+      <CartDrawer setCartOpen={setCartOpen} cartOpen={cartOpen} />
+
+      {/* Menu Slide Drawer */}
+      <div
+        className={`fixed top-0 right-0 h-full w-1/4 bg-black text-white z-40 shadow-lg transform transition-transform duration-300 ${
+          menuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex justify-between items-center p-4 border-b border-gray-700">
+          <h2 className="text-xl font-bold">About Our Store</h2>
+          <FaTimes
+            className="text-xl cursor-pointer"
+            onClick={() => setMenuOpen(false)}
           />
         </div>
+        <div className="p-4 overflow-y-auto h-full">
+          <p className="mb-4">
+            Welcome to BakeNest! We offer the best cakes, pies, and pastries.
+          </p>
+          <ul className="mb-8">
+            <li>#cakes</li>
+            <li>#pastries</li>
+            <li>#delicious</li>
+          </ul>
+          <form className="space-y-4">
+            <input
+              type="text"
+              placeholder="Your Name"
+              className="w-full p-2 bg-gray-800 border border-gray-700 rounded"
+            />
+            <input
+              type="email"
+              placeholder="Your Email"
+              className="w-full p-2 bg-gray-800 border border-gray-700 rounded"
+            />
+            <textarea
+              placeholder="Your Message"
+              className="w-full p-2 bg-gray-800 border border-gray-700 rounded"
+            />
+            <button
+              type="submit"
+              className="w-full bg-gray-600 p-2 rounded hover:bg-gray-500"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+
+      {menuOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-30"
+          onClick={() => setMenuOpen(false)}
+        />
+      )}
+    </>
   );
 };
 

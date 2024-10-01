@@ -1,0 +1,74 @@
+.mainDivAuth {
+  height: 100vh;
+}
+
+.imgDivAuth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formDivAuth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.formDivMain {
+  background-color: white;
+  border-radius: 10px;
+  width: 70%;
+  margin: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 2rem;
+}
+.fieldsAuth {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.authField {
+  background-color: var(--primary-color4);
+  border-radius: 10px;
+  outline: none;
+  padding: 8px 14px;
+  width: 100%;
+}
+.file-upload {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.file-input {
+  display: none;
+}
+
+.custom-file-label {
+  background-color: var(--primary-color4);
+  border-radius: 10px;
+  padding: 8px 14px;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  color: black;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.custom-file-label:hover {
+  background-color: var(--primary-color2);
+  color: white;
+}
+.imgDivAuth img {
+  width: 60%;
+}
+@media (max-width: 400px) {
+  .imgDivAuth img {
+    width: 50%;
+  }
+}

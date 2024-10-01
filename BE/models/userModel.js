@@ -6,9 +6,6 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    image: {
-      type: String,
-    },
     email: {
       type: String,
       required: true,
@@ -17,18 +14,11 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    token: {
+    role: {
       type: String,
+      default: "user",
     },
-    is_registered: {
-      type: Boolean,
-      default: false,
-    },
-    isAdmin: {
-      type: Boolean,
-      default: false,
-    },
-    contactInfo: {
+    image: {
       type: String,
     },
   },

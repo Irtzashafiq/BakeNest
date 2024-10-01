@@ -1,0 +1,10 @@
+.btnApproved {
+  transition: all 0.4s ease-in-out;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-weight: 500;
+}
+.btnApproved:hover {
+  color: white;
+  background-color: var(--primary-color3);
+}

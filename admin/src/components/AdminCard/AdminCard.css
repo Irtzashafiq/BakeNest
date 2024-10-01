@@ -1,0 +1,49 @@
+.adminCardMain {
+  padding: 13px 15px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+.adminCardMain:hover {
+  transform: scale(1.05);
+}
+.avatarAdmin {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 1px solid var(--primary-color2);
+  overflow: hidden;
+}
+.avatarAdmin img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.nameAdmin {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.cardTags {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 5px;
+  padding: 3px 12px;
+  color: white;
+  font-size: 1.4vh;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.cardTags.organizer {
+  background-color: var(--primary-color3);
+}
+
+.cardTags.user {
+  background-color: var(--primary-color2);
+}
+
+.cardTags.admin {
+  background-color: #5cb85c;
+}
