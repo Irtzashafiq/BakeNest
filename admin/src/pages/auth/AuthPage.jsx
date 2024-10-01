@@ -6,7 +6,7 @@ const AuthPage = () => {
   return (
     <div className="grid sm:grid-cols-2 grid-cols-1 mainDivAuth">
       <div className="imgDivAuth">
-        <img src="FullLogo.svg" alt="" />
+        <img src="FullLogo.png" alt="" />
       </div>
       <div className="formDivAuth">
         <Outlet />

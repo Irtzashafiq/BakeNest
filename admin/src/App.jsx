@@ -7,10 +7,10 @@ import Signup from "./pages/auth/Signup/Signup";
 import AuthPage from "./pages/auth/AuthPage";
 import { useContext, useEffect } from "react";
 import UserContext from "./context/UserContext/UserContext";
-import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import OrderPage from "./pages/Orders/OrderPage";
 import ItemPage from "./pages/Items/ItemPage";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const contxtUser = useContext(UserContext);

@@ -50,7 +50,12 @@ const Nav = () => {
             </ul>
           </div>
         </div>
-        <img className="imgNav" src="NavLogo.svg" alt="Planify" />
+        <div
+          className="text-5xl font-serif p-4 cursor-pointer bg-gradient-to-r  from-[#FAA653] rounded-l-full "
+          style={{ fontFamily: "'Great Vibes', cursive" }}
+        >
+          BakeNest
+        </div>
       </div>
       <div>
         <IconButton

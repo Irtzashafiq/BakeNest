@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ItemPage = () => {
   const [showForm, setShowForm] = useState(false);
@@ -20,10 +22,11 @@ const ItemPage = () => {
       const response = await axios.get(
         "http://localhost:3000/item/getallItems"
       );
-      console.log(response.data.response);
       setItems(response.data.response); // Ensure this matches the API response structure
     } catch (error) {
-      console.error("Error fetching items:", error);
+      toast.error("Error fetching items.", {
+        position: "bottom-right",
+      });
     }
   };
 
@@ -52,36 +55,40 @@ const ItemPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create a new item object without id for POST requests
     const itemToSubmit = editMode
-      ? newItem // In edit mode, keep the id for updating
+      ? newItem
       : {
           itemName: newItem.itemName,
           itemPrice: newItem.itemPrice,
           itemDescription: newItem.itemDescription,
-          //   itemImage: newItem.itemImage,
         };
 
     if (editMode) {
-      // Edit mode: Send a PUT request to update the item
       try {
         await axios.put(
           `http://localhost:3000/item/updateItem/:?id=${newItem._id}`,
-
           itemToSubmit
         );
-        console.log(newItem._id);
+        toast.success("Item updated successfully.", {
+          position: "bottom-right",
+        });
         fetchItems(); // Refresh the items list after editing
       } catch (error) {
-        console.error("Error updating item:", error);
+        toast.error("Error updating item.", {
+          position: "bottom-right",
+        });
       }
     } else {
-      // Create new item via POST request
       try {
         await axios.post("http://localhost:3000/item/createItem", itemToSubmit);
+        toast.success("Item added successfully.", {
+          position: "bottom-right",
+        });
         fetchItems(); // Refresh the items list after creation
       } catch (error) {
-        console.error("Error adding item:", error);
+        toast.error("Error adding item.", {
+          position: "bottom-right",
+        });
       }
     }
 
@@ -93,7 +100,6 @@ const ItemPage = () => {
       itemName: "",
       itemPrice: "",
       itemDescription: "",
-      //   itemImage: "",
     });
   };
 
@@ -101,9 +107,14 @@ const ItemPage = () => {
   const deleteItem = async (_id) => {
     try {
       await axios.delete(`http://localhost:3000/item/deleteItem/:?id=${_id}`);
+      toast.success("Item deleted successfully.", {
+        position: "bottom-right",
+      });
       fetchItems(); // Refresh the items list after deleting
     } catch (error) {
-      console.error("Error deleting item:", error);
+      toast.error("Error deleting item.", {
+        position: "bottom-right",
+      });
     }
   };
 
@@ -116,13 +127,12 @@ const ItemPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
+      <ToastContainer />
       <div className="max-w-4xl mx-auto bg-white shadow-md p-6 rounded-lg">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-orange-500">
-            Item Management
-          </h2>
+          <h2 className="text-2xl font-bold text-[#FAA653]">Item Management</h2>
           <button
-            className="bg-orange-400 hover:bg-orange-500 text-white py-2 px-4 rounded-lg"
+            className="bg-[#FAA653] hover:bg-orange-400 text-white py-2 px-4 rounded-lg"
             onClick={toggleForm}
           >
             {showForm ? "Close Form" : "Add New Item"}
@@ -141,7 +151,7 @@ const ItemPage = () => {
                 name="itemName"
                 value={newItem.itemName}
                 onChange={handleInputChange}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FAA653]"
                 required
               />
             </div>
@@ -153,7 +163,7 @@ const ItemPage = () => {
                 name="itemPrice"
                 value={newItem.itemPrice}
                 onChange={handleInputChange}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FAA653]"
                 required
               />
             </div>
@@ -166,7 +176,7 @@ const ItemPage = () => {
                 name="itemDescription"
                 value={newItem.itemDescription}
                 onChange={handleInputChange}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FAA653]"
                 rows="4"
                 required
               />
@@ -179,13 +189,13 @@ const ItemPage = () => {
                 name="itemImage"
                 value={newItem.itemImage}
                 onChange={handleInputChange}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FAA653]"
               />
             </div>
 
             <button
               type="submit"
-              className="bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-lg"
+              className="bg-[#FAA653] hover:bg-orange-400 text-white py-2 px-4 rounded-lg"
             >
               {editMode ? "Update Item" : "Add Item"}
             </button>
@@ -204,7 +214,7 @@ const ItemPage = () => {
                   className="p-4 bg-white border border-gray-200 rounded-lg shadow-md flex justify-between items-center"
                 >
                   <div>
-                    <h4 className="text-lg font-bold text-orange-500">
+                    <h4 className="text-lg font-bold text-[#FAA653]">
                       {item.itemName}
                     </h4>
                     <p className="text-gray-700">${item.itemPrice}</p>
@@ -219,7 +229,7 @@ const ItemPage = () => {
                   </div>
                   <div className="flex space-x-4">
                     <FaEdit
-                      className="text-gray-600 cursor-pointer hover:text-orange-500"
+                      className="text-gray-600 cursor-pointer hover:text-[#FAA653]"
                       onClick={() => editItem(item)}
                     />
                     <FaTrash

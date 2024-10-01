@@ -1,4 +1,4 @@
-// src/components/admin/OrderPage.jsx
+
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -52,7 +52,7 @@ const OrderPage = () => {
     <div className="min-h-screen bg-gray-100 p-6">
       <ToastContainer />
       <div className="max-w-7xl mx-auto bg-white shadow-md rounded-lg p-6">
-        <h1 className="text-2xl font-semibold text-orange-500 mb-4">
+        <h1 className="text-2xl font-semibold text-[#FAA653] mb-4">
           Order Management
         </h1>
         {loading ? (

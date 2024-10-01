@@ -4,7 +4,7 @@
 
 :root {
   --primary-color1: #ed1650;
-  --primary-color2: #e8a803;
+  --primary-color2: #FAA653;
   --primary-color3: #e8483c;
   --primary-color4: #eef8fe;
 }
@@ -16,7 +16,7 @@
   color: #ed1650;
 }
 .prime2 {
-  color: #e8a803;
+  color: #FAA653;
   transition: all 0.3s ease-in-out;
 }
 .prime2.activePrime2:hover {

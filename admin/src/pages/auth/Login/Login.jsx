@@ -48,7 +48,7 @@ const Login = () => {
   };
   return (
     <div className="formDivMain ">
-      <h2 className="text-[5vh] font-bold prime2">Login</h2>
+      <h2 className="text-[5vh] font-bold prime2 text-[#FAA653]">Login</h2>
       <div className="fieldsAuth  w-full gap-y-2">
         <input
           onChange={handleChange}
@@ -79,7 +79,7 @@ const Login = () => {
         </span>
       </div>
 
-      <button onClick={handleLogin} className="btnMain mt-5">
+      <button onClick={handleLogin} className="btnMain mt-5 bg-[#FAA653]">
         Login
       </button>
     </div>
