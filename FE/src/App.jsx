@@ -10,6 +10,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Signup from "./auth/Signup/Signup";
 import Login from "./auth/Login";
 import TierSection from "./pages/TierSection";
+import CheckoutPage from "./pages/PaymentPage";
 
 const App = () => {
   const location = useLocation();
@@ -27,6 +28,8 @@ const App = () => {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/tiers" element={<TierSection />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+
           <Route path="/" element={<Navigate to="/login" />} />
 
           <Route path="*" element={<ErrorPage />} />

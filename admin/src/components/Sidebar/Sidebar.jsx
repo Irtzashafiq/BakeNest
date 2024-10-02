@@ -16,6 +16,9 @@ const Sidebar = () => {
           <li onClick={() => navigate("/items")} className="sideLinks">
             Add Items
           </li>
+          <li onClick={() => navigate("/feedbacks")} className="sideLinks">
+            FeedBacks
+          </li>
         </ul>
       </div>
       <div className="rightContatiner">

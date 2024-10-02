@@ -7,6 +7,8 @@ var cors = require("cors");
 var mongoose = require("mongoose");
 var usersRouter = require("./routes/users");
 var itemsRouter = require("./routes/items");
+var orderRouter = require("./routes/orders");
+var contactRouter = require("./routes/contact");
 
 var app = express();
 var connectioNString =
@@ -41,6 +43,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/user", usersRouter);
 app.use("/item", itemsRouter);
+app.use("/order", orderRouter);
+app.use("/contact", contactRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

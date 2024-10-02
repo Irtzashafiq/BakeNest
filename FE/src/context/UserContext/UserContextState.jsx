@@ -23,7 +23,7 @@ const UserContextState = (props) => {
   };
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [getUsers]);
 
   return (
     <UserContext.Provider

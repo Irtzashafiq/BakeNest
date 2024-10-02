@@ -10,8 +10,13 @@ const ItemSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    itemQuantity: {
+      type: String,
+    },
+
     itemDescription: {
       type: String,
+      default: 1,
     },
     itemImage: {
       type: String,
@@ -20,6 +25,9 @@ const ItemSchema = new mongoose.Schema(
     itemLike: {
       type: Boolean,
     },
+    username: {
+      type: String,
+    }
   },
   {
     timestamps: true,

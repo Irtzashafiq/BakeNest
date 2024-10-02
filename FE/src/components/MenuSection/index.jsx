@@ -1,34 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
 import CartContext from "../../context/CartContext/CartContext";
-import axios from "axios"; // Import axios for API requests
-
+import axios from "axios";
 const MenuSection = () => {
-  const [menuItems, setMenuItems] = useState([]); // Initialize as an empty array
+  const [menuItems, setMenuItems] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const { addToCart } = useContext(CartContext);
 
-  // Fetch menu items from the API when the component mounts
   useEffect(() => {
     const fetchMenuItems = async () => {
       try {
         const response = await axios.get(
           "http://localhost:3000/item/getAllItems"
-        ); // Replace with your API endpoint
-        const fetchedItems = response.data.response; // Assuming response.data is an array
+        );
+        const fetchedItems = response.data.response;
 
-        // Check if the fetched data is an array, otherwise log it for debugging
-        if (Array.isArray(fetchedItems)) {
-          setMenuItems(fetchedItems);
-        } else {
-          console.error("API response is not an array:", fetchedItems);
-        }
+        setMenuItems(fetchedItems);
       } catch (error) {
         console.error("Error fetching menu items:", error);
       }
     };
 
     fetchMenuItems();
-  }, []); // Empty dependency array to fetch data on component mount
+  }, []);
 
   return (
     <section className="py-[8%] bg-white">
@@ -52,6 +45,7 @@ const MenuSection = () => {
                   />
                 </div>
                 <h3 className="text-xl font-semibold">{item?.itemName}</h3>
+                <h3 className="text-lg ">{item?.itemDescription}</h3>
                 <p className="text-lg font-bold text-orange-500">
                   ${item?.itemPrice}
                 </p>
@@ -64,7 +58,7 @@ const MenuSection = () => {
               </div>
             ))
           ) : (
-            <p>No items found</p> // Handle empty or invalid data
+            <p>No items found</p>
           )}
         </div>
       </div>

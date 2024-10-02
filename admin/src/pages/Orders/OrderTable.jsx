@@ -42,17 +42,17 @@ const OrderTable = ({ orders, onUpdateStatus }) => {
                   #{order.id}
                 </td>
                 <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">
-                  {order.customerName}
+                  {order.userName}
                 </td>
                 <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">
                   {order.items.map((item, index) => (
                     <span key={index} className="block">
-                      {item.quantity}x {item.name}
+                      {item.quantity}x {item.itemName}
                     </span>
                   ))}
                 </td>
                 <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">
-                  ${order.totalAmount.toFixed(2)}
+                  ${order.totalPrice}
                 </td>
                 <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">
                   <span
@@ -74,8 +74,8 @@ const OrderTable = ({ orders, onUpdateStatus }) => {
                     onChange={(e) => onUpdateStatus(order.id, e.target.value)}
                   >
                     <option value="Pending">Pending</option>
-                    <option value="Processing">Processing</option>
-                    <option value="Completed">Completed</option>
+                    <option value="On the Way">On the Way</option>
+                    <option value="Delivered">Delivered</option>
                     <option value="Cancelled">Cancelled</option>
                   </select>
                 </td>

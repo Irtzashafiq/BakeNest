@@ -6,15 +6,8 @@ import TestimonialsSection from "../components/TestimonialSection";
 import History from "./HistoryPage";
 import Footer from "../components/Footer/Footer";
 import TextImagePage from "./TextImagePage";
-import { useEffect } from "react";
-import { toast } from "react-toastify";
-const HomePage = () => {
-  useEffect(() => {
-    toast.success("somethung", {
-      position: "top-right",
-    });
-  }, []);
 
+const HomePage = () => {
   return (
     <div>
       <HeroSection />

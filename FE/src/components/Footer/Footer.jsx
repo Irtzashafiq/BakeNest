@@ -85,7 +85,7 @@ const Footer = () => {
       </div>
 
       <div className="mt-10 text-center border-t border-gray-700 pt-5">
-        <p className="text-gray-500">&copy; 2018 Copyright GoodResto</p>
+        <p className="text-gray-500">&copy; 2024 Copyright BakeNest</p>
         <p className="text-gray-500">
           Created with love by{" "}
           <a href="#" className="text-orange-500 hover:text-orange-400">

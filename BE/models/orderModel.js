@@ -2,24 +2,20 @@ const mongoose = require("mongoose");
 
 const OrderSchema = new mongoose.Schema(
   {
-    item: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Item",
-      },
-    ],
-    Payments: {
-      type: String,
-      enum: ["COD", "Online"],
+    items: Array,
+    totalPrice: Number,
+    id: {
+      type: Number,
+      default: 1,
     },
-    Buyer: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    Status: {
+    status: {
       type: String,
-      enum: ["preparing", "prepared", "on the way", "Delivered"],
-      default: "preparing",
+      enum: ["pending", "On The Way", "Delivered", "Cancelled"],
+      default: "Pending",
     },
   },
   {
@@ -27,6 +23,5 @@ const OrderSchema = new mongoose.Schema(
   }
 );
 
-const Item = mongoose.model("Order", OrderSchema);
-
+const Order = mongoose.model("Order", OrderSchema);
 module.exports = Order;

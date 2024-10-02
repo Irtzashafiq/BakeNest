@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import urlApi from "../../MainLinks"; // Ensure this points to your API base URL
@@ -14,7 +12,9 @@ const OrderPage = () => {
   // Fetch all orders
   const fetchOrders = async () => {
     try {
-      const response = await axios.get(`${urlApi}/orders/getallorders`);
+      const response = await axios.get(
+        `http://localhost:3000/order/getAllOrders`
+      );
       setOrders(response.data.response);
       setLoading(false);
     } catch (error) {

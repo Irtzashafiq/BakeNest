@@ -12,6 +12,7 @@ const ItemPage = () => {
     itemName: "",
     itemPrice: "",
     itemDescription: "",
+    itemQuantity: "",
     // itemImage: "",
   });
   const [editMode, setEditMode] = useState(false);
@@ -41,6 +42,7 @@ const ItemPage = () => {
       itemName: "",
       itemPrice: "",
       itemDescription: "",
+      itemQuantity: "",
       //   itemImage: "",
     });
     setEditMode(false);
@@ -65,9 +67,14 @@ const ItemPage = () => {
 
     if (editMode) {
       try {
+        var obj = {
+          itemName: newItem?.itemName,
+          itemPrice: newItem?.itemPrice,
+          itemDescription: newItem?.itemDescription,
+        };
         await axios.put(
           `http://localhost:3000/item/updateItem/:?id=${newItem._id}`,
-          itemToSubmit
+          obj
         );
         toast.success("Item updated successfully.", {
           position: "bottom-right",
@@ -100,6 +107,7 @@ const ItemPage = () => {
       itemName: "",
       itemPrice: "",
       itemDescription: "",
+      itemQuantity: "",
     });
   };
 

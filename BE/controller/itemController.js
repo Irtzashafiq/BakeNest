@@ -5,6 +5,7 @@ const createItemSchema = joi.object().keys({
   itemName: joi.string().required(),
   itemPrice: joi.string().required(),
   itemDescription: joi.string().max(200),
+  itemQuantity: joi.string()
 });
 const updateItemSchema = joi.object().keys({
   itemName: joi.string().required(),
@@ -30,6 +31,7 @@ module.exports = {
         itemName: validate.itemName,
         itemPrice: validate.itemPrice,
         itemDescription: validate.itemDescription,
+        itemQuantity: validate.itemQuantity,
         // image: req.file ? req.file.path : null,
       });
       const itemCreated = await items.save();

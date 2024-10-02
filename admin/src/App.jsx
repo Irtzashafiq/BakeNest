@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import OrderPage from "./pages/Orders/OrderPage";
 import ItemPage from "./pages/Items/ItemPage";
 import "react-toastify/dist/ReactToastify.css";
+import FeedbackPage from "./pages/FeedBack/feedbackPage";
 
 function App() {
   const contxtUser = useContext(UserContext);
@@ -32,6 +33,7 @@ function App() {
             <Route path="/users" element={<User />} />
             <Route path="/orders" element={<OrderPage />} />
             <Route path="/items" element={<ItemPage />} />
+            <Route path="/feedbacks" element={<FeedbackPage />} />
             <Route path="*" element={<Navigate to="/users" />} />
           </Route>
         </Routes>
