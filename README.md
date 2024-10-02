@@ -1,2 +1,2 @@
-# Net-Worth-Tracking-application
-Test Project
+# Bakery Store Project
+
