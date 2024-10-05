@@ -36,18 +36,18 @@ const OrderTable = ({ orders, onUpdateStatus }) => {
               </td>
             </tr>
           ) : (
-            orders.map((order) => (
-              <tr key={order.id} className="hover:bg-gray-100">
+            orders.map((order, i) => (
+              <tr key={order._id} className="hover:bg-gray-100">
                 <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">
-                  #{order.id}
+                  {i + 1}
                 </td>
                 <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">
-                  {order.userName}
+                  {order?.user?.username}
                 </td>
                 <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">
                   {order.items.map((item, index) => (
                     <span key={index} className="block">
-                      {item.quantity}x {item.itemName}
+                      {item.quantity} {item.itemName}
                     </span>
                   ))}
                 </td>
@@ -71,7 +71,7 @@ const OrderTable = ({ orders, onUpdateStatus }) => {
                   <select
                     className="border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-orange-500"
                     value={order.status}
-                    onChange={(e) => onUpdateStatus(order.id, e.target.value)}
+                    onChange={(e) => onUpdateStatus(order._id, e.target.value)}
                   >
                     <option value="Pending">Pending</option>
                     <option value="On the Way">On the Way</option>

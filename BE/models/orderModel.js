@@ -3,19 +3,19 @@ const mongoose = require("mongoose");
 const OrderSchema = new mongoose.Schema(
   {
     items: Array,
-    totalPrice: Number,
-    id: {
+    totalPrice: {
       type: Number,
-      default: 1,
+      required: true,
     },
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
+
+    user: Object,
     status: {
       type: String,
-      enum: ["pending", "On The Way", "Delivered", "Cancelled"],
-      default: "Pending",
+      enum: ["COD", "Online"],
+      default: "COD",
+    },
+    action: {
+      type: String,
     },
   },
   {

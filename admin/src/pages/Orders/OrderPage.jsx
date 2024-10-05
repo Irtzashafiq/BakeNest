@@ -15,6 +15,7 @@ const OrderPage = () => {
       const response = await axios.get(
         `http://localhost:3000/order/getAllOrders`
       );
+      console.log(response.data.response);
       setOrders(response.data.response);
       setLoading(false);
     } catch (error) {

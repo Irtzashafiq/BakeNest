@@ -34,16 +34,13 @@ function App() {
             <Route path="/orders" element={<OrderPage />} />
             <Route path="/items" element={<ItemPage />} />
             <Route path="/feedbacks" element={<FeedbackPage />} />
-            <Route path="*" element={<Navigate to="/users" />} />
           </Route>
         </Routes>
       ) : (
         <Routes>
           <Route element={<AuthPage />}>
-            <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Signup />} />
-            <Route path="*" element={<Navigate to="/login" />} />
           </Route>
         </Routes>
       )}

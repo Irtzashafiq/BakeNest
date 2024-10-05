@@ -1,15 +1,21 @@
 const Order = require("../models/orderModel");
-
+const User = require("../models/userModel");
 module.exports = {
   placeOrder: async (req, res) => {
-    const { cartItems, userId, totalPrice,  } = req.body;
+    const { items, userId, totalPrice, status } = req.body;
 
     try {
+      var newUser = await User.findById(userId);
+      // console.log(items);
+      // console.log(newUser);
+      // console.log(userId);
+      // console.log(totalPrice);
+      // console.log(status);
       const newOrder = new Order({
-        items: cartItems,
-        user: userId,
+        items,
+        user: newUser,
         totalPrice,
-        status: "Paid",
+        status,
       });
 
       await newOrder.save();

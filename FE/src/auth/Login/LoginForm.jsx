@@ -25,8 +25,8 @@ const LoginForm = () => {
       );
       toast.success(response.data.message);
       localStorage.setItem("token", response.data.userId);
-      // contxtUser.setToken(response.data.userId);
-
+      contxtUser?.setUserExist(response.data.userId);
+      console.log(response.data.userId);
       if (response.data.userId !== undefined) {
         navigate("/home");
       }

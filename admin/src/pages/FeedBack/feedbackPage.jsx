@@ -10,25 +10,33 @@ const FeedbackPage = () => {
   ); // Default to today's date
   const [filteredFeedbacks, setFilteredFeedbacks] = useState([]);
 
-  useEffect(() => {
-    const fetchFeedbacks = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/contact/getFeedback"
-        );
-        setFeedbacks(response.data);
-        setFilteredFeedbacks(response.data); // Initially set filteredFeedbacks to all feedbacks
-      } catch (error) {
-        console.error("Error fetching feedbacks", error);
-      }
-    };
+  const fetchFeedbacks = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/contact/getFeedback"
+      );
+      setFeedbacks(response.data);
+      setFilteredFeedbacks(response.data);
+      console.log("getFunctions");
+    } catch (error) {
+      console.error("Error fetching feedbacks", error);
+    }
+  };
 
+  useEffect(() => {
     fetchFeedbacks();
   }, []);
 
   useEffect(() => {
+    const interval = setInterval(fetchFeedbacks, 300000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  useEffect(() => {
     filterFeedbacks();
-  }, [selectedDate, feedbacks]); // Re-filter when the selected date or feedbacks change
+  }, [selectedDate, feedbacks]);
 
   const filterFeedbacks = () => {
     const startOfDay = new Date(selectedDate).setHours(0, 0, 0, 0);
