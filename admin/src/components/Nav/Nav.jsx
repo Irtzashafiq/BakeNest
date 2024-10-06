@@ -8,7 +8,7 @@ const Nav = () => {
   const [displayDrop, setDisplayDrop] = useState(false);
   const contxtUser = useContext(UserContext);
   const navigate = useNavigate();
-  const { currentUser, setCurrentUser, token, setToken } = contxtUser;
+  const { setCurrentUser, setToken } = contxtUser;
   const handleLogout = () => {
     setCurrentUser(null);
     setToken("");

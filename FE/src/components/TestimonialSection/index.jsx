@@ -22,7 +22,7 @@ const TestimonialsSection = () => {
           {testimonials.map((testimonial, index) => (
             <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
               <img
-                src={testimonial.image}
+                // src={testimonial.image}
                 alt={testimonial.name}
                 loading="lazy"
                 className="w-16 h-16 rounded-full mx-auto mb-4"

@@ -39,6 +39,7 @@ function App() {
       ) : (
         <Routes>
           <Route element={<AuthPage />}>
+            <Route path="*" element={<Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Signup />} />
           </Route>

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import CartContext from "../context/CartContext/CartContext";
-
 import axios from "axios";
 import UserContext from "../context/UserContext/userContext";
 
@@ -31,8 +30,9 @@ const CheckoutPage = () => {
       status: paymentMethod,
       totalPrice: totalPrice,
     };
-    await axios
-      .post("http://localhost:3000/order/placeOrder", obj)
+    await axios.post("http://localhost:3000/order/placeOrder", obj);
+    console
+      .log(response.data.response)
       .then((val) => console.log(val))
       .catch((e) => console.log("error"));
   };
@@ -61,14 +61,14 @@ const CheckoutPage = () => {
                 onChange={() => setPaymentMethod("COD")}
                 className="mr-2"
               />
-              <label htmlFor="cash" className="text-lg font-medium text-black">
+              <label htmlFor="COD" className="text-lg font-medium text-black">
                 Cash on Delivery
               </label>
             </div>
             <div className="flex items-center">
               <input
                 type="radio"
-                id="Online"
+                id="Onine"
                 name="payment"
                 value="Online"
                 checked={paymentMethod === "Online"}
@@ -76,16 +76,16 @@ const CheckoutPage = () => {
                 className="mr-2"
               />
               <label
-                htmlFor="online"
+                htmlFor="Online"
                 className="text-lg font-medium text-black"
               >
-                Card Payment
+                Visa Card Payment
               </label>
             </div>
           </div>
 
           {/* Show Card Details Form if Visa Card is selected */}
-          {paymentMethod === "Online" && (
+          {paymentMethod === "card" && (
             <div className="mt-6 bg-white p-4 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-black mb-4">
                 Card Details

@@ -9,5 +9,5 @@ const {
 
 router.post("/placeOrder", placeOrder);
 router.get("/getAllOrders", getOrder);
-router.delete("/deleteorder/:id", deleteOrder);
+router.delete("/deleteOrder/:id", deleteOrder);
 module.exports = router;

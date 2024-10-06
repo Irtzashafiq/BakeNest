@@ -9,13 +9,19 @@ const OrderPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const handleDeleteOrder = (orderId) => {
+    setOrders((prevOrders) =>
+      prevOrders.filter((order) => order._id !== orderId)
+    );
+  };
+
   // Fetch all orders
   const fetchOrders = async () => {
     try {
       const response = await axios.get(
         `http://localhost:3000/order/getAllOrders`
       );
-      console.log(response.data.response);
+
       setOrders(response.data.response);
       setLoading(false);
     } catch (error) {
@@ -29,9 +35,10 @@ const OrderPage = () => {
 
   useEffect(() => {
     fetchOrders();
+    const intervalId = setInterval(fetchOrders, 60000);
+    return () => clearInterval(intervalId);
   }, []);
 
-  // Handle order status update (example function)
   const updateOrderStatus = async (orderId, newStatus) => {
     try {
       await axios.put(`${urlApi}/orders/updateorder/${orderId}`, {
@@ -80,7 +87,11 @@ const OrderPage = () => {
             </svg>
           </div>
         ) : (
-          <OrderTable orders={orders} onUpdateStatus={updateOrderStatus} />
+          <OrderTable
+            orders={orders}
+            onUpdateStatus={updateOrderStatus}
+            onDeleteOrder={handleDeleteOrder}
+          />
         )}
       </div>
     </div>

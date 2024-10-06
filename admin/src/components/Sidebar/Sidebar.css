@@ -50,3 +50,8 @@
     width: 100vw;
   }
 }
+
+.sideLinks.active {
+  color: #faa653;
+  font-weight: bold;
+}

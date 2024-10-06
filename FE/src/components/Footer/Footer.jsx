@@ -28,32 +28,32 @@ const Footer = () => {
           <h4 className="text-white font-semibold mb-3">RECENT EVENT</h4>
           <div className="grid grid-cols-3 gap-2">
             <img
-              src="Events/e1.png"
+              // src="Events/e1.png"
               alt="Event 1"
               className="rounded-lg h-[150px] w-[150px]"
             />
             <img
-              src="Events/e2.png"
+              // src="Events/e2.png"
               alt="Event 2"
               className="rounded-lg h-[150px] w-[150px]"
             />
             <img
-              src="Events/e3.jpg"
+              // src="Events/e3.jpg"
               alt="Event 3"
               className="rounded-lg h-[150px] w-[150px]"
             />
             <img
-              src="Events/e4.jpg"
+              // src="Events/e4.jpg"
               alt="Event 4"
               className="rounded-lg h-[150px] w-[150px]"
             />
             <img
-              src="Events/e5.jpg"
+              // src="Events/e5.jpg"
               alt="Event 5"
               className="rounded-lg h-[150px] w-[150px]"
             />
             <img
-              src="Events/e6.jpeg"
+              // src="Events/e6.jpeg"
               alt="Event 6"
               className="rounded-lg h-[150px] w-[150px]"
             />

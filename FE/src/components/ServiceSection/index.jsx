@@ -27,7 +27,7 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
               <img
-                src={service.Image}
+                // src={service.Image}
                 alt={service.title}
                 loading="lazy"
                 className="w-16 h-16 mx-auto mb-4"

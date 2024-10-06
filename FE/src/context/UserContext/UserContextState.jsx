@@ -10,20 +10,20 @@ const UserContextState = (props) => {
 
   const getUsers = async () => {
     await axios
-      .get(url + "/users/getalluser")
+      .get(url + "/user/getalluser")
       .then((val) => setUsers(val.data.response))
       .catch((e) => console.log(e));
   };
 
   const deleteUser = async (id) => {
     await axios
-      .delete(url + "/users/deleteuser/:?id=" + id)
+      .delete(url + "/user/deleteuser/:?id=" + id)
       .then((val) => console.log(val.data))
       .catch((e) => console.log(e));
   };
   useEffect(() => {
     getUsers();
-  }, [getUsers]);
+  }, []);
 
   return (
     <UserContext.Provider

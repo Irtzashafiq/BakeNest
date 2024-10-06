@@ -1,17 +1,27 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FaShoppingCart, FaSearch, FaBars, FaTimes } from "react-icons/fa";
+import {
+  FaShoppingCart,
+  FaSearch,
+  FaBars,
+  FaTimes,
+  FaSignOutAlt,
+} from "react-icons/fa";
 import CartDrawer from "../CartDrawer";
 import "./navbar.css";
 import CartContext from "../../context/CartContext/CartContext";
+import { ToastContainer, toast } from "react-toastify";
+import UserContext from "../../context/UserContext/userContext";
+import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
-
   const { cartItems } = useContext(CartContext);
+  const contxtUser = useContext(UserContext);
+  const { setUserExist } = contxtUser;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +39,24 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [location.pathname]);
+
+  const handleLogout = async () => {
+    try {
+      setUserExist(null);
+
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+
+      toast.success("Logout successful! Redirecting...");
+
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 2000);
+    } catch (error) {
+      console.error("Failed to logout:", error);
+      toast.error("Failed to logout. Please try again.");
+    }
+  };
 
   return (
     <>
@@ -74,12 +102,9 @@ const Navbar = () => {
               className="icon cursor-pointer hover:text-gray-300 text-xl"
               onClick={() => setCartOpen(true)}
             />
-            {
-              <span className="badge bg-red-500">
-                {cartItems?.length > 0 ? cartItems?.length : 0}
-              </span>
-            }
-                
+            <span className="badge bg-orange-500 ">
+              {cartItems?.length > 0 ? cartItems?.length : 0}
+            </span>
           </div>
           <div className="icon-wrapper">
             <FaSearch className="icon cursor-pointer hover:text-gray-300 text-xl" />
@@ -90,12 +115,18 @@ const Navbar = () => {
               onClick={() => setMenuOpen(true)}
             />
           </div>
+
+          <div className="icon-wrapper">
+            <FaSignOutAlt
+              className="icon cursor-pointer hover:text-orange-600 text-xl "
+              onClick={handleLogout}
+            />
+          </div>
         </div>
       </nav>
 
       <CartDrawer setCartOpen={setCartOpen} cartOpen={cartOpen} />
 
-      {/* Menu Slide Drawer */}
       <div
         className={`fixed top-0 right-0 h-full w-1/4 bg-black text-white z-40 shadow-lg transform transition-transform duration-300 ${
           menuOpen ? "translate-x-0" : "translate-x-full"
@@ -148,6 +179,8 @@ const Navbar = () => {
           onClick={() => setMenuOpen(false)}
         />
       )}
+
+      <ToastContainer />
     </>
   );
 };

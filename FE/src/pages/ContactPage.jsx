@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; 
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -40,7 +40,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="container mx-auto py-12 mt-[6%]">
+    <div className="container mx-auto py-12 mt-[4%]">
       <h1 className="text-5xl font-bold text-center mb-8 text-gray-700">
         Contact Us
       </h1>
@@ -92,12 +92,19 @@ const ContactPage = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-orange-600 text-white font-semibold py-3 rounded-lg hover:bg-orange-700 transition duration-300 shadow-md"
+          className="w-full bg-orange-400 text-white font-semibold py-3 rounded-lg hover:bg-orange-500 transition duration-300 shadow-md"
         >
           Send Message
         </button>
       </form>
-      <ToastContainer /> 
+
+      <ToastContainer />
+
+      <div className="flex items-end justify-center h-full w-full bg-black bg-opacity-40 rounded-lg p-4 ">
+        <h2 className="text-white text-2xl font-semibold">
+          We'd love to hear from you!
+        </h2>
+      </div>
     </div>
   );
 };

@@ -1,10 +1,25 @@
-// src/components/admin/OrderTable.jsx
-
 import React from "react";
+import axios from "axios";
+import { FaTrashAlt } from "react-icons/fa"; // FontAwesome Trash Icon
+import { ToastContainer, toast } from "react-toastify"; // Importing toast functions
+import "react-toastify/dist/ReactToastify.css"; // Importing styles for toast notifications
 
-const OrderTable = ({ orders, onUpdateStatus }) => {
+const OrderTable = ({ orders, onUpdateStatus, onDeleteOrder }) => {
+  // Function to handle delete
+  const handleDelete = async (orderId) => {
+    try {
+      await axios.delete(`http://localhost:3000/order/deleteOrder/${orderId}`);
+      onDeleteOrder(orderId);
+      toast.success("Order deleted successfully!");
+    } catch (error) {
+      console.error("Failed to delete the order:", error);
+      toast.error("Failed to delete the order."); 
+    }
+  };
+
   return (
     <div className="overflow-x-auto">
+      <ToastContainer /> 
       <table className="min-w-full bg-white">
         <thead>
           <tr>
@@ -26,12 +41,15 @@ const OrderTable = ({ orders, onUpdateStatus }) => {
             <th className="py-2 px-4 border-b-2 border-gray-200 text-left text-sm font-semibold text-gray-700">
               Actions
             </th>
+            <th className="py-2 px-4 border-b-2 border-gray-200 text-left text-sm font-semibold text-gray-700">
+              Delete
+            </th>
           </tr>
         </thead>
         <tbody>
           {orders.length === 0 ? (
             <tr>
-              <td colSpan="6" className="text-center py-4">
+              <td colSpan="7" className="text-center py-4">
                 No orders found.
               </td>
             </tr>
@@ -78,6 +96,15 @@ const OrderTable = ({ orders, onUpdateStatus }) => {
                     <option value="Delivered">Delivered</option>
                     <option value="Cancelled">Cancelled</option>
                   </select>
+                </td>
+                <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-700 text-center">
+                  {/* Delete Icon */}
+                  <button
+                    onClick={() => handleDelete(order._id)}
+                    className="text-red-600 hover:text-red-800"
+                  >
+                    <FaTrashAlt />
+                  </button>
                 </td>
               </tr>
             ))

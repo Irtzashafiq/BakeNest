@@ -6,11 +6,6 @@ module.exports = {
 
     try {
       var newUser = await User.findById(userId);
-      // console.log(items);
-      // console.log(newUser);
-      // console.log(userId);
-      // console.log(totalPrice);
-      // console.log(status);
       const newOrder = new Order({
         items,
         user: newUser,
@@ -78,20 +73,15 @@ module.exports = {
   //   },
   deleteOrder: async (req, res) => {
     try {
-      const orders = await Order.findByIdAndDelete(req.query.id);
+      const orders = await Order.findByIdAndDelete(req.params.id);
       if (!orders) {
-        return res.send({
-          message: "order not found!",
-        });
+        return res.status(404).send("Order not found");
       }
 
-      return res.send({
-        message: "Order deleted successfully",
-      });
+      res.status(200).send("Order deleted successfully");
     } catch (error) {
-      return res.send({
-        message: error.message,
-      });
+      console.error(error);
+      res.status(500).send("Server Error");
     }
   },
 };

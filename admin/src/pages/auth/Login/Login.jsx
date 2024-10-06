@@ -33,7 +33,7 @@ const Login = () => {
           toast.success("Login successfully!", {
             position: "bottom-right",
           });
-          navigate("/");
+          navigate("/users");
         } else {
           toast.error("Something went wrong!", {
             position: "bottom-right",
