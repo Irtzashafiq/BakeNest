@@ -2,9 +2,11 @@ import React, { useContext, useState } from "react";
 import CartContext from "../context/CartContext/CartContext";
 import axios from "axios";
 import UserContext from "../context/UserContext/userContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CheckoutPage = () => {
-  const { cartItems, totalPrice } = useContext(CartContext);
+  const { cartItems, totalPrice, clearCart } = useContext(CartContext);
   const contxtUser = useContext(UserContext);
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [cardDetails, setCardDetails] = useState({
@@ -14,27 +16,35 @@ const CheckoutPage = () => {
   });
 
   const placeOrder = async () => {
-    var arr = [];
-    cartItems.map((val) => {
-      var obj1 = {
-        id: val._id,
-        itemName: val.itemName,
-        itemPrice: val.itemPrice,
-      };
-      arr.push(obj1);
-    });
+    try {
+      var arr = [];
+      cartItems.map((val) => {
+        var obj1 = {
+          id: val._id,
+          itemName: val.itemName,
+          itemPrice: val.itemPrice,
+        };
+        arr.push(obj1);
+      });
 
-    var obj = {
-      items: arr,
-      userId: contxtUser?.userExist,
-      status: paymentMethod,
-      totalPrice: totalPrice,
-    };
-    await axios.post("http://localhost:3000/order/placeOrder", obj);
-    console
-      .log(response.data.response)
-      .then((val) => console.log(val))
-      .catch((e) => console.log("error"));
+      var obj = {
+        items: arr,
+        userId: contxtUser?.userExist,
+        status: paymentMethod,
+        totalPrice: totalPrice,
+      };
+      await axios.post("http://localhost:3000/order/placeOrder", obj);
+
+      toast.success("Thanks for the Order!", {
+        position: "bottom-right",
+      });
+      clearCart();
+    } catch (error) {
+      toast.error("Failed to place the order. Please try again.", {
+        position: "bottom-right",
+      });
+      console.error("Error placing order:", error);
+    }
   };
 
   const handleCardChange = (e) => {
@@ -45,7 +55,6 @@ const CheckoutPage = () => {
   return (
     <div className="container mx-auto px-4 py-8 mt-[8%]">
       <div className="flex flex-col lg:flex-row lg:space-x-8">
-        {/* Payment Options (Left) */}
         <div className="lg:w-1/2 w-full bg-gray-100 p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-6 text-black">
             Payment Method
@@ -85,7 +94,7 @@ const CheckoutPage = () => {
           </div>
 
           {/* Show Card Details Form if Visa Card is selected */}
-          {paymentMethod === "card" && (
+          {paymentMethod === "Online" && (
             <div className="mt-6 bg-white p-4 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-black mb-4">
                 Card Details
@@ -175,6 +184,7 @@ const CheckoutPage = () => {
           Place Order
         </button>
       </div>
+      <ToastContainer />
     </div>
   );
 };

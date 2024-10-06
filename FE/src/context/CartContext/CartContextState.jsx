@@ -50,6 +50,12 @@ const CartContextState = (props) => {
     }, 0);
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+    setTotalPrice(0);
+    localStorage.removeItem("cartItems");
+  };
+
   useEffect(() => {
     const ttlprice = calculateTotalPrice();
     setTotalPrice(ttlprice);
@@ -70,6 +76,7 @@ const CartContextState = (props) => {
         decrementItem,
         removeItem,
         totalPrice,
+        clearCart,
       }}
     >
       {props.children}

@@ -23,14 +23,14 @@ module.exports = {
       const existingUser = await user.findOne({ email });
 
       if (existingUser) {
-        return res.send({
+        return res.status(409).send({
           message: "User already exist!",
           response: existingUser,
         });
       }
 
       if (req.body.password !== req.body.confirmPassword) {
-        return res.send({
+        return res.status(400).send({
           message: "password not matched",
         });
       }
@@ -44,12 +44,12 @@ module.exports = {
       });
       const userCreated = await users.save();
 
-      return res.send({
+      return res.status(201).send({
         message: "User created successfully",
         response: userCreated,
       });
     } catch (error) {
-      return res.send({
+      return res.status(500).send({
         message: error.message,
       });
     }

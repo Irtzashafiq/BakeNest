@@ -7,14 +7,14 @@ import UserContext from "../../../context/UserContext/UserContext";
 import { toast } from "react-toastify";
 const Signup = () => {
   const [inputData, setInputData] = useState({
-    email: "",
     username: "",
+    email: "",
     password: "",
-    confirmpassword: "",
-    role: "user",
+    confirmPassword: "",
+    role: "admin",
   });
   const [role, setRole] = useState(false);
-  const [image, setImage] = useState(null);
+  // // const [image, setImage] = useState(null);
   const contxtUser = useContext(UserContext);
   const navigate = useNavigate();
   const { reloadUser, setReloadUser } = contxtUser;
@@ -22,16 +22,16 @@ const Signup = () => {
     const { name, value } = e.target;
     setInputData((prev) => ({ ...prev, [name]: value }));
   };
-  const handleRegister = async () => {
+  const SignUpAdmin = async () => {
     const formData = new FormData();
-    formData.append("image", image);
-    formData.append("role", inputData.role);
+    // formData.append("image", image);
     formData.append("username", inputData.username);
     formData.append("email", inputData.email);
     formData.append("password", inputData.password);
-    formData.append("confirmpassword", inputData.confirmpassword);
+    formData.append("confirmPassword", inputData.confirmPassword);
+    formData.append("role", inputData.role);
     await axios
-      .post(urlApi + "/users/signup", formData, {
+      .post(urlApi + "/user/register", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -43,10 +43,10 @@ const Signup = () => {
             email: "",
             username: "",
             password: "",
-            confirmpassword: "",
-            role: "user",
+            confirmPassword: "",
+            role: "admin",
           });
-          setImage(null);
+          // setImage(null);
           setRole(false);
           toast.success("Register successfully", {
             position: "bottom-right",
@@ -64,13 +64,13 @@ const Signup = () => {
         })
       );
   };
-  useEffect(() => {
-    if (role === true) {
-      setInputData((prev) => ({ ...prev, role: "organizer" }));
-    } else {
-      setInputData((prev) => ({ ...prev, user: "user" }));
-    }
-  }, [role]);
+  // useEffect(() => {
+  //   if (role === true) {
+  //     setInputData((prev) => ({ ...prev, role: "user" }));
+  //   } else {
+  //     setInputData((prev) => ({ ...prev, user: "admin" }));
+  //   }
+  // }, [role]);
 
   return (
     <div className="formDivMain ">
@@ -102,13 +102,13 @@ const Signup = () => {
         />
         <input
           onChange={handleChange}
-          value={inputData.confirmpassword}
-          name="confirmpassword"
+          value={inputData.confirmPassword}
+          name="confirmPassword"
           type="password"
           className="authField"
           placeholder="Confrim Password"
         />
-        <div className="file-upload">
+        {/* <div className="file-upload">
           <input
             type="file"
             id="fileInput"
@@ -118,9 +118,9 @@ const Signup = () => {
           <label htmlFor="fileInput" className="custom-file-label">
             Choose File
           </label>
-        </div>
+        </div> */}
 
-        <div className="w-full flex items-center justify-start">
+        {/* <div className="w-full flex items-center justify-start">
           <input
             checked={role}
             onChange={(e) => setRole(e.target.checked)}
@@ -132,7 +132,7 @@ const Signup = () => {
           <label htmlFor="chekRole" className="text-gray-400  text-[2.2vh]">
             Register as an Organizer
           </label>
-        </div>
+        </div> */}
       </div>
       <div className="flex justify-end items-center w-full">
         <small className="text-gray-400  text-[2vh]">
@@ -146,7 +146,7 @@ const Signup = () => {
         </span>
       </div>
 
-      <button onClick={handleRegister} className="btnMain mt-5">
+      <button onClick={SignUpAdmin} className="btnMain mt-5">
         Register
       </button>
     </div>

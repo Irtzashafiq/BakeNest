@@ -12,7 +12,6 @@ const UserContextState = (props) => {
     await axios
       .get(urlApi + "/user/getalluser")
       .then((val) => {
-        console.log(val);
         setUsers(val?.data?.response);
       })
       .catch((e) => console.log(e));

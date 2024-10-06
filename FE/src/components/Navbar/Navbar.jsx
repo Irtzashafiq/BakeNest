@@ -19,7 +19,7 @@ const Navbar = () => {
   const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, clearCart } = useContext(CartContext);
   const contxtUser = useContext(UserContext);
   const { setUserExist } = contxtUser;
 
@@ -43,7 +43,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       setUserExist(null);
-
+      clearCart();
       localStorage.removeItem("user");
       localStorage.removeItem("token");
 
