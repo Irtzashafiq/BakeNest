@@ -93,7 +93,6 @@ const CheckoutPage = () => {
             </div>
           </div>
 
-          {/* Show Card Details Form if Visa Card is selected */}
           {paymentMethod === "Online" && (
             <div className="mt-6 bg-white p-4 rounded-lg shadow-md">
               <h3 className="text-xl font-semibold text-black mb-4">
@@ -146,7 +145,6 @@ const CheckoutPage = () => {
           )}
         </div>
 
-        {/* Cart Summary (Right) */}
         <div className="lg:w-1/2 w-full bg-gray-50 p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-6 text-black">Your Cart</h2>
           <div className="space-y-4">
@@ -167,7 +165,6 @@ const CheckoutPage = () => {
             )}
           </div>
 
-          {/* Total Amount */}
           <div className="mt-6 text-lg font-semibold text-black">
             <span>Total: </span>
             <span>${totalPrice.toFixed(2)}</span>
@@ -175,7 +172,6 @@ const CheckoutPage = () => {
         </div>
       </div>
 
-      {/* Place Order Button */}
       <div className="mt-8 flex justify-center">
         <button
           onClick={placeOrder}
