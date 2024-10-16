@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignUpForm = () => {
+  const [img, setImg] = useState(null);
+
   const [inputData, setInputData] = useState({
     username: "",
     email: "",
@@ -41,6 +43,7 @@ const SignUpForm = () => {
     formData.append("email", inputData.email);
     formData.append("password", inputData.password);
     formData.append("confirmPassword", inputData.confirmPassword);
+    formData.append("image", img);
     await axios
       .post("http://localhost:3000/user/register", formData, {
         headers: {
@@ -123,6 +126,17 @@ const SignUpForm = () => {
             value={inputData.confirmPassword}
             onChange={handleChange}
             name="confirmPassword"
+          />
+        </div>
+      </div>
+      <div className="mt-5">
+        <div>
+          <label className="text-lg font-medium ">Image</label>
+          <input
+            type="file"
+            placeholder="Image"
+            className="w-full border-2 border-gray-100 rounded-xl p-4 mt-1 bg-transparent"
+            onChange={(e) => setImg(e.target.files[0])}
           />
         </div>
       </div>

@@ -1,4 +1,7 @@
 var express = require("express");
+const multer = require("multer");
+
+const upload = multer({ dest: "uploads/" });
 
 const {
   getItems,
@@ -10,7 +13,7 @@ const {
 
 var router = express.Router();
 
-router.post("/createItem", createItem);
+router.post("/createItem", upload.single("itemImage"), createItem);
 router.get("/getallItems", getItems);
 router.get("/getItem/:id", getItemById);
 router.put("/updateItem/:id", updateItem);

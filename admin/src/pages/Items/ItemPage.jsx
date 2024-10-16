@@ -13,7 +13,7 @@ const ItemPage = () => {
     itemPrice: "",
     itemDescription: "",
     itemQuantity: "",
-    // itemImage: "",
+    itemImage: "",
   });
   const [editMode, setEditMode] = useState(false);
 
@@ -43,7 +43,7 @@ const ItemPage = () => {
       itemPrice: "",
       itemDescription: "",
       itemQuantity: "",
-      //   itemImage: "",
+      itemImage: "",
     });
     setEditMode(false);
   };
@@ -87,7 +87,16 @@ const ItemPage = () => {
       }
     } else {
       try {
-        await axios.post("http://localhost:3000/item/createItem", itemToSubmit);
+        const formData = new FormData();
+        formData.append("itemImage", newItem.itemImage);
+        formData.append("itemName", newItem.itemName);
+        formData.append("itemPrice", newItem.itemPrice);
+        formData.append("itemDescription", newItem.itemDescription);
+        await axios.post("http://localhost:3000/item/createItem", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
         toast.success("Item added successfully.", {
           position: "bottom-right",
         });
@@ -108,6 +117,7 @@ const ItemPage = () => {
       itemPrice: "",
       itemDescription: "",
       itemQuantity: "",
+      itemImage: "",
     });
   };
 
@@ -132,6 +142,10 @@ const ItemPage = () => {
     setShowForm(true);
     setEditMode(true);
   };
+
+  useEffect(() => {
+    console.log(items);
+  }, [items]);
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
@@ -193,10 +207,13 @@ const ItemPage = () => {
             <div className="mb-4">
               <label className="block text-gray-700 mb-2">Item Image URL</label>
               <input
-                type="text"
-                name="itemImage"
-                value={newItem.itemImage}
-                onChange={handleInputChange}
+                type="file"
+                onChange={(e) =>
+                  setNewItem((prev) => ({
+                    ...prev,
+                    itemImage: e.target.files[0],
+                  }))
+                }
                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FAA653]"
               />
             </div>
@@ -227,13 +244,13 @@ const ItemPage = () => {
                     </h4>
                     <p className="text-gray-700">${item.itemPrice}</p>
                     <p className="text-gray-600">{item.itemDescription}</p>
-                    {/* {item.itemImage && (
-                      <img
-                        src={item.itemImage}
-                        alt={item.itemName}
-                        className="mt-2 w-full h-40 object-cover rounded-lg"
-                      />
-                    )} */}
+                    {/* {item?.itemImage && ( */}
+                    <img
+                      src={"http://localhost:3000/" + item?.itemImage}
+                      alt={item.itemName}
+                      className="mt-2 w-full h-40 object-cover rounded-lg"
+                    />
+                    {/* // )} */}
                   </div>
                   <div className="flex space-x-4">
                     <FaEdit

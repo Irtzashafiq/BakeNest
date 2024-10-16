@@ -33,7 +33,7 @@ const CartDrawer = ({ cartOpen, setCartOpen }) => {
                 <div className="h-[60px] overflow-hidden w-[60px] rounded-xl">
                   <img
                     className="w-[100%] object-cover "
-                    src={item.itemImage}
+                    src={"http://localhost:3000/" + item?.itemImage}
                     alt=""
                   />
                 </div>

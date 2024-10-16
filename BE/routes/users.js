@@ -9,6 +9,7 @@ const {
   getUserById,
   updateUser,
   deleteUser,
+  updatePlan,
 } = require("../controller/userController");
 const { login } = require("../controller/authController");
 
@@ -19,6 +20,7 @@ router.get("/getalluser", getUsers);
 router.get("/getuser/:id", getUserById);
 router.post("/updateuser/:id", updateUser);
 router.delete("/deleteuser/:id", deleteUser);
+router.post("/updateplan/:id", updatePlan);
 router.post("/login", login);
 
 module.exports = router;

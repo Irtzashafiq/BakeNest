@@ -21,6 +21,9 @@ const UserContextState = (props) => {
       .then((val) => console.log(val.data))
       .catch((e) => console.log(e));
   };
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   return (
     <UserContext.Provider

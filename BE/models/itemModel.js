@@ -7,7 +7,7 @@ const ItemSchema = new mongoose.Schema(
       required: true,
     },
     itemPrice: {
-      type: String,
+      type: Number,
       required: true,
     },
     itemQuantity: {
@@ -20,14 +20,14 @@ const ItemSchema = new mongoose.Schema(
     },
     itemImage: {
       type: String,
-      default: "user",
     },
     itemLike: {
       type: Boolean,
     },
     username: {
       type: String,
-    }
+    },
+   
   },
   {
     timestamps: true,

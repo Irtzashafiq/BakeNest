@@ -5,7 +5,7 @@ const createItemSchema = joi.object().keys({
   itemName: joi.string().required(),
   itemPrice: joi.string().required(),
   itemDescription: joi.string().max(200),
-  itemQuantity: joi.string()
+  itemQuantity: joi.string(),
 });
 const updateItemSchema = joi.object().keys({
   itemName: joi.string().required(),
@@ -16,7 +16,6 @@ module.exports = {
   createItem: async (req, res) => {
     try {
       const { itemName } = req.body;
-
       const validate = await createItemSchema.validateAsync(req.body);
 
       const existingItem = await item.findOne({ itemName });
@@ -32,7 +31,7 @@ module.exports = {
         itemPrice: validate.itemPrice,
         itemDescription: validate.itemDescription,
         itemQuantity: validate.itemQuantity,
-        // image: req.file ? req.file.path : null,
+        itemImage: req.file ? req.file.path : null,
       });
       const itemCreated = await items.save();
 

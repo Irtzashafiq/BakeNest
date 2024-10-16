@@ -2,7 +2,6 @@ import React from "react";
 import "./AdminCard.css";
 const AdminCard = ({
   user,
-  role,
   location,
   deleteUser,
 

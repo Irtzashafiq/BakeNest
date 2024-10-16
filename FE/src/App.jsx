@@ -1,4 +1,3 @@
-
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 import Navbar from "./components/Navbar/Navbar";
@@ -11,9 +10,17 @@ import Signup from "./auth/Signup/Signup";
 import Login from "./auth/Login";
 import TierSection from "./pages/TierSection";
 import CheckoutPage from "./pages/PaymentPage";
+import { useContext, useEffect } from "react";
+import UserContext from "./context/UserContext/userContext";
 
 const App = () => {
+  const { setUserExist } = useContext(UserContext);
   const location = useLocation();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setUserExist(token);
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       {location.pathname !== "/login" && location.pathname !== "/signup" && (

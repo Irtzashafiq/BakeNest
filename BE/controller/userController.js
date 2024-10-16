@@ -123,4 +123,24 @@ module.exports = {
       });
     }
   },
+  updatePlan: async (req, res) => {
+    try {
+      const { plan } = req.body;
+
+      const userRecord = await user.findById(req.query.id);
+
+      if (userRecord) {
+        await user.updateOne({ _id: req.query.id }, { $set: { plan: plan } });
+      }
+
+      return res.send({
+        message: "Subscribed",
+        response: userRecord,
+      });
+    } catch (error) {
+      return res.send({
+        message: error.message,
+      });
+    }
+  },
 };
